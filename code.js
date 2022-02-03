@@ -1,17 +1,18 @@
-let img = document.createElement("img");
+// SELECTORS
+let img = document.querySelector("img");
+let btn = document.querySelector("button");
 
-// fetch(file)
-// .then(get JSON data)
-// .then(convert JSON data to useable data);
-// .then(set img url to the useable data);
+// OPTION A - Async/Await (see the README for an alternative way to write this function)
+async function getNewDogImg() {
+  let response = await fetch("https://random.dog/woof.json"); // fetch gets data from an API that is in a JSON format, that data is then stored in the response variable
+  let data = await response.json(); // .json() converts the response JSON data to usable data, this usable data is stored in the data variable
+  img.src = data.url; // image.src is set equal to data.url to render the new dog image
+}
 
-fetch("https://random.dog/woof.json", { method: "GET" })
-  .then((response) => {
-    return response.json();
-  })
-  .then((jsonData) => {
-    console.log(jsonData);
-    img.src = jsonData.url;
-  });
+// EVENT LISTENERS
+btn.addEventListener("click", () => {
+  getNewDogImg(); // make a new fetch call that updates img
+});
 
-document.body.append(img);
+// GET INITIAL DOG PHOTO ON PAGE LOAD/REFRESH
+getNewDogImg();
