@@ -6,6 +6,7 @@ let btn = document.querySelector("button");
 async function getNewDogImg() {
   let response = await fetch("https://random.dog/woof.json"); // fetch gets data from an API that is in a JSON format, that data is then stored in the response variable
   let data = await response.json(); // .json() converts the response JSON data to usable data, this usable data is stored in the data variable
+  console.log(data); // see the usable data on your console log
   img.src = data.url; // image.src is set equal to data.url to render the new dog image
 }
 
